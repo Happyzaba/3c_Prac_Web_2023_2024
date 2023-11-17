@@ -1,0 +1,11 @@
+zad 5 z pomaranczowych:
+Wygodniej jest stosowac instrukcje switch poniewaz mozna przypisac rozna wartosc ktora robi cos innego pod dany case, 
+a w ifie nie da sie tego zrobic w tak latwy sposob. Jest wieksza przejrzystosc kodu. W ifie moze zajsc mala pomylka i 
+wszystko sie sypie a w switchie takie cos jest ciezkie
+
+zielone:
+1. C
+2. A
+3. B
+4. C
+5. D
