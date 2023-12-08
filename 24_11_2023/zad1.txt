@@ -1,0 +1,3 @@
+Programista uzywajac petli moze miec wiele korzysci moze to byc np. latwiejsza czytelnosc kodu, wieksza orientacja w swoim kodzie, 
+wie co sie gdzie znajduje, pozwalaja na wiele wiecej niz standardowe pisanie kodu, petli jest kilka wiec w zaleznosci od potrzeb
+moze uzyc ich do danej jego potrzeby.
