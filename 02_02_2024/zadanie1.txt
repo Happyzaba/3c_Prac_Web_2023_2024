@@ -1,0 +1,12 @@
+metoda GET
+    wady:
+        dane sa wysylane w adresie URL strony
+    zalety:
+        umieszczone dane mozna latwo modyfikowac nie potrzeba do 
+        tego formularza
+metoda POST
+    wady:
+        do zmodyfikowania danych potrzebny jest formularz
+    zalety:
+        nie ma ograniczenia dlugosci danych, nie posluguje sie 
+        adresem URL strony

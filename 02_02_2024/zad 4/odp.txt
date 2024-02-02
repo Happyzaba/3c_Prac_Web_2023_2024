@@ -1,0 +1,2 @@
+ zad 2: http://localhost/02_02_2024/zad%202/zad2.php?imie=imie&nazwisko=nazwisko&wyslij=Wyslij
+ zad 3: http://localhost/02_02_2024/zad%203/zad3.php
