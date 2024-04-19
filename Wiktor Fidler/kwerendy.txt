@@ -1,0 +1,5 @@
+1. SELECT uzytkownicy.haslo from uzytkownicy WHERE uzytkownicy.login = "Justyna";
+2. SELECT COUNT(id) FROM dane;
+3. SELECT uzytkownicy.login, dane.rok_urodz, dane.przyjaciol, dane.hobby, dane.zdjecie 
+   FROM uzytkownicy LEFT JOIN dane ON uzytkownicy.id = dane.id;
+4. ALTER TABLE dane ADD COLUMN stanowkisko varchar(255)
