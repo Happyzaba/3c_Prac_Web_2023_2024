@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    background-color: aliceblue;
+}
+a{
+    text-decoration: none;
+}
+.nav__abilities{
+    color: crimson;
+}
+.nav__interests{
+    color:coral;
+}
+.nav__achievements{
+    color: blueviolet;
+}
+.header__paragraph{
+    color: darkblue;
+}
+.header__image{
+    border-radius: 100%;
+    height: 100px;
+}
+.abilities{
+    background-color:azure;
+}
+.abilities__header1{
+    color: crimson;
+}
+.abilities__paragraph{
+    color: burlywood;
+}
+.interests__header1{
+    color: coral;
+}
+.achievements__header1{
+    color: blueviolet;
+}
