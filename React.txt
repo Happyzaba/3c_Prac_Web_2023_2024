@@ -1,0 +1,187 @@
+App 
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./Header";
+import Home from "./Home";
+import Products from "./Products";
+import Cart from "./Cart";
+import Admin from "./Admin";
+
+function App() {
+  const [cart, setCart] = useState([]);
+  const [logged, setLogged] = useState(false);
+
+  const addToCart = (item) => {
+    if (!cart.find((p) => p.id === item.id)) {
+      setCart([...cart, item]);
+    }
+  };
+
+  const removeFromCart = (id) => {
+    setCart(cart.filter((p) => p.id !== id));
+  };
+
+  return (
+    <BrowserRouter>
+      <Header />
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products addToCart={addToCart} />} />
+          <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
+          <Route path="/admin" element={<Admin logged={logged} setLogged={setLogged} />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+Header 
+import React from "react";
+import { Link } from "react-router-dom";
+import { Navbar, Nav, Container } from "react-bootstrap";
+
+function Header() {
+  return (
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand as={Link} to="/">Sklepik Lidlonka</Navbar.Brand>
+        <Nav className="ms-auto">
+          <Nav.Link as={Link} to="/">Home</Nav.Link>
+          <Nav.Link as={Link} to="/products">Produkty</Nav.Link>
+          <Nav.Link as={Link} to="/cart">Koszyk</Nav.Link>
+          <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
+  );
+}
+
+export default Header;
+
+Home 
+import React from "react";
+
+function Home() {
+  return (
+    <div className="text-center">
+      <h2>Witamy w sklepie Lidlonka!</h2>
+      <p>Wybierz produkty, dodaj do koszyka i złóż zamówienie</p>
+    </div>
+  );
+}
+
+export default Home;
+
+data.js 
+export const products = [
+  { id: 1, name: "Bułka", category: "Pieczywo", price: 1.2 },
+  { id: 2, name: "Ser", category: "Nabiał", price: 4.5 },
+  { id: 3, name: "Mleko", category: "Nabiał", price: 3.2 },
+  { id: 4, name: "Szynka", category: "Mięso", price: 6.0 },
+];
+
+Products 
+import React, { useState } from "react";
+import { products } from "./data";
+import { Button, Form } from "react-bootstrap";
+
+function Products({ addToCart }) {
+  const [filter, setFilter] = useState("");
+
+  const categories = [...new Set(products.map(p => p.category))];
+  const filtered = filter ? products.filter(p => p.category === filter) : products;
+
+  return (
+    <div>
+      <h3>Lista produktów</h3>
+      <Form>
+        {categories.map(cat => (
+          <Form.Check
+            key={cat}
+            inline
+            type="radio"
+            name="category"
+            label={cat}
+            onChange={() => setFilter(cat)}
+          />
+        ))}
+        <Form.Check
+          inline
+          type="radio"
+          name="category"
+          label="Wszystkie"
+          onChange={() => setFilter("")}
+        />
+      </Form>
+      <div className="row mt-3">
+        {filtered.map(p => (
+          <div key={p.id} className="col-md-3 mb-3">
+            <div className="card p-3 text-center">
+              <h5>{p.name}</h5>
+              <p>{p.category}</p>
+              <p>{p.price} zł</p>
+              <Button onClick={() => addToCart(p)}>Dodaj do koszyka</Button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Products;
+
+Cart
+import React from "react";
+import { Button } from "react-bootstrap";
+
+function Cart({ cart, removeFromCart }) {
+  return (
+    <div>
+      <h3>Koszyk</h3>
+      {cart.length === 0 ? (
+        <p>Brak produktów w koszyku.</p>
+      ) : (
+        <ul className="list-group">
+          {cart.map(p => (
+            <li key={p.id} className="list-group-item d-flex justify-content-between">
+              {p.name} – {p.price} zł
+              <Button size="sm" onClick={() => removeFromCart(p.id)}>Usuń</Button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export default Cart;
+
+Admin 
+import React from "react";
+import { Button } from "react-bootstrap";
+
+function Admin({ logged, setLogged }) {
+  if (!logged) {
+    return (
+      <div>
+        <h3>Panel administratora</h3>
+        <p>Brak dostępu! Kliknij, aby się zalogować:</p>
+        <Button onClick={() => setLogged(true)}>Zaloguj</Button>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <h3>Panel administratora</h3>
+      <p>Witaj, Admin!</p>
+      <Button variant="secondary" onClick={() => setLogged(false)}>Wyloguj</Button>
+    </div>
+  );
+}
+
+export default Admin;
